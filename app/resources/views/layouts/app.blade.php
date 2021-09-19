@@ -18,6 +18,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .avatar {
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+    </style>
 </head>
 <body>
     <div id="app">
@@ -93,6 +102,8 @@
                             
                             <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ 'http://127.0.0.1:8000/img/'. Auth::user()->profileimage }}" class="avatar" />
+
           {{ Auth::user()->email }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

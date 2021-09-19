@@ -7,8 +7,11 @@
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+
+                <div class="row">
+                    <div class="col-md-8">
+                    <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row mt-3">
@@ -54,6 +57,21 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group row mt-3">
+                            <label for="email"  class="col-md-4 col-form-label text-md-right">{{ __('Profile Image') }}</label>
+
+                            <div class="col-md-6">
+                            <input id="profileimage" type="file" multiple accept="image/*" onChange="displayImage(this)" id="profileimage" class="form-control @error('email') is-invalid @enderror" name="profileimage" value="{{ old('profileimage') }}" required>
+
+                                @error('profileimage')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="form-group row mt-3">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -91,8 +109,36 @@
                         </div>
                     </form>
                 </div>
+                    </div>
+                    <div class="col-md m-2">
+                        <div class="text-center">
+                        <img src="images/avatar.jpg" class="img-fluid img-thumbnail" onClick="triggerClick()" id="profileDisplay">
+                    
+                        </div>
+                    </div>
+                </div>
+
+
+                
+
+                
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+<script>
+    function triggerClick(e) {
+  document.querySelector('#profileimage').click();
+}
+function displayImage(e) {
+  if (e.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e){
+      document.querySelector('#profileDisplay').setAttribute('src', e.target.result);
+    }
+    reader.readAsDataURL(e.files[0]);
+  }
+}
+</script>
