@@ -9,6 +9,14 @@ class Startup extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'img',
+        'email',
+        'user_id',
+        'kindstartup_id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

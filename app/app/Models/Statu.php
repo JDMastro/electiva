@@ -9,6 +9,10 @@ class Statu extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'description',
+    ];
+
     public function requests()
     {
         return $this->hasMany(Request::class);

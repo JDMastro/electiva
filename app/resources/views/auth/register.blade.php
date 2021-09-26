@@ -62,7 +62,7 @@
                             <label for="email"  class="col-md-4 col-form-label text-md-right">{{ __('Profile Image') }}</label>
 
                             <div class="col-md-6">
-                            <input id="profileimage" type="file" multiple accept="image/*" onChange="displayImage(this)" id="profileimage" class="form-control @error('email') is-invalid @enderror" name="profileimage" value="{{ old('profileimage') }}" required>
+                            <input id="profileimage" type="file" multiple accept="image/*" onChange="displayImage(this)" id="profileimage" class="form-control @error('email') is-invalid @enderror" name="profileimage" value="{{ old('profileimage') }}">
 
                                 @error('profileimage')
                                     <span class="invalid-feedback" role="alert">
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md m-2">
                         <div class="text-center">
-                        <img src="images/avatar.jpg" class="img-fluid img-thumbnail" onClick="triggerClick()" id="profileDisplay">
+                        <img src="http://127.0.0.1:8000/img/ggg.png" class="img-fluid img-thumbnail" onClick="triggerClick()" id="profileDisplay">
                     
                         </div>
                     </div>

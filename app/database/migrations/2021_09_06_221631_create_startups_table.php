@@ -17,7 +17,7 @@ class CreateStartupsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->bigInteger('user_id')->unsigned();
-
+            $table->string('img');
             
             $table->bigInteger('kindstartup_id')->unsigned();
 

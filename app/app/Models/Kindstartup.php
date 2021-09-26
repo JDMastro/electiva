@@ -9,6 +9,10 @@ class Kindstartup extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
 
     public function startups()
     {

@@ -57,7 +57,6 @@ class RegisterController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'profileimage' => ['required','mimes:jpeg,jpg,png,gif','max:10000'],
         ]);
     }
 
@@ -69,38 +68,34 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-       echo '<pre>'; print_r($data); echo '</pre>';
-       if ($data['profileimage']->isValid()) {
-            $imageName = time().'.'.$data['profileimage']->extension();
-            $data['profileimage']->move(public_path('img'), $imageName);
+       //echo '<pre>'; print_r($data); echo '</pre>';
+       if(array_key_exists("profileimage",$data)){
+        $imageName = time().'.'.$data['profileimage']->extension();
+        $data['profileimage']->move(public_path('img'), $imageName);
 
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'lastname' => $data['lastname'],
-                'password' => Hash::make($data['password']),
-                'profileimage' => $imageName
-            ]);
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'lastname' => $data['lastname'],
+            'password' => Hash::make($data['password']),
+            'profileimage' => $imageName
+        ]);
 
-            $rolesC = Role::where('description','Client')->get();
-            $user->roles()->attach($rolesC[0]->id);
-       
-        }else{
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'lastname' => $data['lastname'],
-                'password' => Hash::make($data['password']),
-                'profileimage' => 'https://source.unsplash.com/random'
-            ]);
+        $rolesC = Role::where('description','Client')->get();
+        $user->roles()->attach($rolesC[0]->id);
+       }else{
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'lastname' => $data['lastname'],
+            'password' => Hash::make($data['password']),
+            'profileimage' => 'ggg.png'
+        ]);
 
-            $rolesC = Role::where('description','Client')->get();
-            $user->roles()->attach($rolesC[0]->id);
-        }
-
-        //echo $data['profileImage']->isValid();
-
-        return $user;
-        
+        $rolesC = Role::where('description','Client')->get();
+        $user->roles()->attach($rolesC[0]->id);
+       }
+    return $user;
+    
     }
 }
