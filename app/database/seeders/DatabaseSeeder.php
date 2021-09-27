@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         
         $this->call(StatusSeeder::class);
         $this->call(StartupSeeder::class);
+        $this->call(QualificationSeeder::class);
     }
 }

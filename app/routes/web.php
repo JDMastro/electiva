@@ -13,8 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use App\Models\Contracts\StartupContract;
+
+Route::get('/', function (StartupContract $startupContract) {
+    $startups = $startupContract->with(['kindstartup', 'avg'])->paginate(21);
+
+    return View('welcome')->with('startups',$startups);
+    //return view('welcome');
 });
 
 Auth::routes();

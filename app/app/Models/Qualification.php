@@ -9,6 +9,12 @@ class Qualification extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'rate',
+        'startup_id',
+        'user_id',
+    ];
+
     public function startup()
     {
         return $this->belongsTo(Startup::class);

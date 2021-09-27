@@ -4,10 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Contracts\StartupContract;
+use Illuminate\Support\Facades\DB;
 
-class Startup extends Model
+class Startup extends Model implements StartupContract
 {
     use HasFactory;
+
+
+    public function getId() : int { return $this-> getAttribute('id'); }
+    public function getName() : string { return $this-> getAttribute('name'); }
+    public function getImg() : string { return $this-> getAttribute('img'); }
+    public function getKindstartupId() : int { return $this-> getAttribute('kindstartup_id'); }
+    public function getUserId() : int { return $this-> getAttribute('user_id'); }
+
+
+
+
+
+
+
+
+
+
+
+
 
     protected $fillable = [
         'name',
@@ -36,4 +57,25 @@ class Startup extends Model
     {
         return $this->hasMany(Qualification::class);
     }
+
+
+
+
+
+
+
+
+    //------------------
+
+    public function avg() {
+        $result = $this->qualifications()
+        ->select(DB::raw('avg(rate) as avg, startup_id'))
+        ->groupBy('startup_id');
+        return $result;
+     }
+
+   
+
+
+
 }

@@ -15,8 +15,8 @@ class KindofStartupSeeder extends Seeder
     {
         //
         $kindStartupData = [
-            ["name"=>"Mobile Android"],
-            ["name"=>"Mobile IOS"],
+            ["name"=>"Android"],
+            ["name"=>"IOS"],
             ["name"=>"Desktop"],
             ["name"=>"Web"],
         ];
