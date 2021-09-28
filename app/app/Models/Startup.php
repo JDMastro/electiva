@@ -11,6 +11,14 @@ class Startup extends Model implements StartupContract
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'img',
+        'email',
+        'user_id',
+        'kindstartup_id'
+    ];
+
 
     public function getId() : int { return $this-> getAttribute('id'); }
     public function getName() : string { return $this-> getAttribute('name'); }
@@ -30,13 +38,7 @@ class Startup extends Model implements StartupContract
 
 
 
-    protected $fillable = [
-        'name',
-        'img',
-        'email',
-        'user_id',
-        'kindstartup_id'
-    ];
+   
 
     public function user()
     {
