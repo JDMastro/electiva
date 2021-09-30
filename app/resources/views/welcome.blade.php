@@ -121,75 +121,86 @@
     @endif
 
 
-
+    
 
     <div class="container container-fluid mt-3">
 
-
-    <div class="">
-        <div></div>
-    </div>
-
-
-
-    <div class="row">
-    @if ($startups->count() == 0)
-        <div>
-            No startup to display.
+    <div class="row mb-2">
+            <div class="col-md-6">
+                Filter :
+                <a class="link-info" href="/">All</a> |
+                <a class="link-info" href="/?kindstartups=WEB">Web</a> |
+                <a class="link-info" href="/?kindstartups=DESKTOP">Desktop</a> |
+                <a class="link-info" href="/?kindstartups=ANDROID">Android</a> |
+                <a class="link-info" href="/?kindstartups=IOS">IOS</a>
+            </div>
+            <div class="col-md-6"></div>
         </div>
-    @endif
 
-    @foreach ($startups as $startup)
-    <div class="col-lg-4 col-md-4 col-xs-6">
 
-    <div class="card p-3 mb-2">
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex flex-row align-items-center">
-                        <div class="icon"> <img src="http://127.0.0.1:8000/img/{{$startup->img}}" alt="..." width="40px" height="40px"/></i> </div>
-                        <div class="ms-2 c-details">
-                            <h6 class="mb-0" style="font-size: 1.1vw;">{{$startup->sname}}</h6> 
-                        </div>
-                    </div>
-                    <div class="badge"> <span>{{$startup->kname}}</span> </div>
-                </div>
-                <div class="">
-                
-                    <div class="mt-5">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width:{{($startup->avg*100)/5}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                            <div class="mt-3"> <span class="text1">{{number_format(floatval($startup->avg),1)}} qualification <span class="text2">of 5 </span></span> </div>
-                            </div>
-                            <div class="col-6">
-                            <div class="d-flex justify-content-center mt-1">
-                <h3 class="heading"><a class="link-info" href="/login" style="font-size: 1vw;">Request service</a><br></h3>
-                </div>
+        <div class="row">
+            @if ($startups->count() == 0)
+            <div>
+                No startup to display.
+            </div>
+            @endif
+
+
+            @foreach ($startups as $startup)
+            <div class="col-lg-4 col-md-4 col-xs-6">
+
+                <div class="card p-3 mb-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="icon"> <img src="http://127.0.0.1:8000/img/{{$startup->img}}" alt="..."
+                                    width="40px" height="40px" /></i> </div>
+                            <div class="ms-2 c-details">
+                                <h6 class="mb-0" style="font-size: 1.1vw;">{{$startup->sname}}</h6>
                             </div>
                         </div>
-                        
+                        <div class="badge"> <span>{{$startup->kname}}</span> </div>
                     </div>
+                    <div class="">
+
+                        <div class="mt-5">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width:{{($startup->avg*100)/5}}%"
+                                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mt-3"> <span class="text1">{{number_format(floatval($startup->avg),1)}}
+                                            qualification <span class="text2">of 5 </span></span> </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex justify-content-center mt-1">
+                                        <h3 class="heading"><a class="link-info" href="/login"
+                                                style="font-size: 1vw;">Request service</a><br></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
                 </div>
-                
-                
-                    
+
             </div>
 
-    </div>
+            @endforeach
 
-    @endforeach
-   
-    </div>
+        </div>
 
-     <div class="d-flex justify-content-center">
-        {!! $startups->links() !!}
-    </div>
+        <div class="d-flex justify-content-center">
+            {!! $startups->links() !!}
+        </div>
 
 
 
 
-    
+
 
 
     </div>

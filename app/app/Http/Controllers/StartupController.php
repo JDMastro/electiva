@@ -8,16 +8,41 @@ use DB;
 
 class StartupController extends Controller
 {
-    public function Index()
+    public function Index(StartupContract $startupContract)
     {
-        $startups = DB::table('startups')
-        ->join('qualifications','startups.id','=','qualifications.startup_id')
-        ->join('kindstartups','startups.kindstartup_id','=','kindstartups.id')
-        ->selectRaw('startups.id as sid, startups.name as sname, startups.img, kindstartups.name as kname, avg(rate) as avg')
-        ->groupBy('startups.id')
-        ->orderBy('avg', 'DESC')
-        ->paginate(21);
-    
+        $startups = new $startupContract;
+
+        $queries = [];
+
+        if(request()->has('kindstartups')){
+            $startups = $startupContract->select(
+                'startups.id as sid', 
+                'startups.name as sname', 
+                'startups.img', 
+                'kindstartups.name as kname', 
+            DB::raw('avg(rate) as avg'))
+            ->join('qualifications','startups.id','=','qualifications.startup_id')
+            ->join('kindstartups','startups.kindstartup_id','=','kindstartups.id')
+            ->groupBy('startups.id')
+            ->orderBy('avg', 'DESC')
+            ->where('kindstartups.name', request('kindstartups'));
+
+            $queries['kindstartups'] = request('kindstartups');
+        }else{
+            $startups = $startupContract->select(
+                'startups.id as sid', 
+                'startups.name as sname', 
+                'startups.img', 
+                'kindstartups.name as kname', 
+            DB::raw('avg(rate) as avg'))
+            ->join('qualifications','startups.id','=','qualifications.startup_id')
+            ->join('kindstartups','startups.kindstartup_id','=','kindstartups.id')
+            ->groupBy('startups.id')
+            ->orderBy('avg', 'DESC');
+        }
+
+        $startups = $startups->paginate(21)->appends($queries);
+
         return View('welcome')->with('startups',$startups);
     }
 }
