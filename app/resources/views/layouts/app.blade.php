@@ -53,7 +53,7 @@
                 @else
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     <!--{{ config('app.name', 'Electiva') }}-->
-                    ELECTIVA III
+                    ELECTIVA II
 
                 </a>
                 @endguest

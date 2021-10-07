@@ -58,7 +58,7 @@
     }
 
     .progress div {
-        background-color: #AAFFF3
+        background-color: blue
     }
 
     .text1 {

@@ -90,5 +90,23 @@ class StartupController extends Controller
         return View('welcome')->with('startups',$startups);
     }
 
+    public function GetStartupByUser(StartupContract $startupContract, $id)
+    {
+        $startups = $startupContract->select(
+            'startups.id as sid', 
+            'startups.name as sname', 
+            'startups.img', 
+            'kindstartups.name as kname', 
+        DB::raw('avg(rate) as avg'),
+        DB::raw('count(requests.id) as count'))
+        ->join('qualifications','startups.id','=','qualifications.startup_id')
+        ->join('kindstartups','startups.kindstartup_id','=','kindstartups.id')
+        ->leftJoin('requests','requests.startup_id','=','startups.id')
+        ->groupBy('startups.id')
+        ->orderBy('avg', 'DESC')
+        ->where('startups.user_id', $id)->paginate(21);
+
+        return response()->json(['data' => $startups]);
+    }
 
 }
