@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Models\Contracts\StartupContract;
 use DB;
 
@@ -39,10 +39,56 @@ class StartupController extends Controller
             ->join('kindstartups','startups.kindstartup_id','=','kindstartups.id')
             ->groupBy('startups.id')
             ->orderBy('avg', 'DESC');
+            //->where('startups.name','LIKE','%'."tw"."%");
         }
 
         $startups = $startups->paginate(21)->appends($queries);
 
+        echo $name = Request::get('search');
+
         return View('welcome')->with('startups',$startups);
     }
+
+    public function Search(StartupContract $startupContract, Request $request, $kindstartups = null)
+    {
+        //echo $kindstartups;
+        $like = $request::input('name');
+
+        if($kindstartups == null)
+        {
+            $startups = $startupContract->select(
+                'startups.id as sid', 
+                'startups.name as sname', 
+                'startups.img', 
+                'kindstartups.name as kname', 
+            DB::raw('avg(rate) as avg'))
+            ->join('qualifications','startups.id','=','qualifications.startup_id')
+            ->join('kindstartups','startups.kindstartup_id','=','kindstartups.id')
+            ->groupBy('startups.id')
+            ->orderBy('avg', 'DESC')
+            ->where('startups.name','LIKE', $like."%");
+        }else{
+            $startups = $startupContract->select(
+                'startups.id as sid', 
+                'startups.name as sname', 
+                'startups.img', 
+                'kindstartups.name as kname', 
+            DB::raw('avg(rate) as avg'))
+            ->join('qualifications','startups.id','=','qualifications.startup_id')
+            ->join('kindstartups','startups.kindstartup_id','=','kindstartups.id')
+            ->groupBy('startups.id')
+            ->orderBy('avg', 'DESC')
+            ->where([
+                ['startups.name','LIKE',$like."%"],
+                ['kindstartups.name', '=', $kindstartups],
+            ]);
+            //->where('kindstartups.name',"=" ,$kindstartups);
+        }
+
+        $startups = $startups->paginate(21);
+
+        return View('welcome')->with('startups',$startups);
+    }
+
+
 }

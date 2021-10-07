@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //use DB;
 
 Route::get('/', 'StartupController@Index');
+Route::get('/search/{kindstartups?}', 'StartupController@Search');
 
 Auth::routes();
 

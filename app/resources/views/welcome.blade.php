@@ -58,7 +58,7 @@
     }
 
     .progress div {
-        background-color: red
+        background-color: #AAFFF3
     }
 
     .text1 {
@@ -121,12 +121,12 @@
     @endif
 
 
-    
+
 
     <div class="container container-fluid mt-3">
 
-    <div class="row mb-2">
-            <div class="col-md-6">
+        <div class="row mb-2">
+            <div class="col-md-12">
                 Filter :
                 <a class="link-info" href="/">All</a> |
                 <a class="link-info" href="/?kindstartups=WEB">Web</a> |
@@ -134,7 +134,35 @@
                 <a class="link-info" href="/?kindstartups=ANDROID">Android</a> |
                 <a class="link-info" href="/?kindstartups=IOS">IOS</a>
             </div>
-            <div class="col-md-6"></div>
+            <div class="col-md-12">
+                <form method="GET" action="{{Request::get('kindstartups') === null ? url('search') : url('search/'.Request::get('kindstartups')) }}">
+                    <!--
+                        {{url('search')}}
+                        "search/".Request::get('kindstartups')
+
+                        {{Request::get('kindstartups') === null ? url('search') : url('search/'.Request::get('kindstartups')) }}
+                    -->
+                
+
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div classs="form-group">
+                                <input type="text" id="name" name="name" placeholder="Startup's name"
+                                    class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div classs="form-group">
+                                <input type="submit" id="search" value="Search"
+                                    class="form-control" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
         </div>
 
 
