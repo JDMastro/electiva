@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Cards } from "./cards";
 import { Link } from "react-router-dom";
 
-import { StartUpRequest } from "../../services/startupsService";
+export function Home({ startups }) {
 
-export function Home({ user }) {
-
-    const [startups, setstartups] = useState([])
-
-    useEffect(() => {
-        StartUpRequest.getStartupsByUser(user.id).then(e => {setstartups(e.data.data); console.log(e.data.data) })
-       
-    }, [])
+    
 
     return (
         <div className="container container-fluid">

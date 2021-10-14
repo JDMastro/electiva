@@ -36,6 +36,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
+        $this->configureModelBinding();
 
         $this->routes(function () {
             Route::prefix('api')

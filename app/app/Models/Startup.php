@@ -14,9 +14,15 @@ class Startup extends Model implements StartupContract
     protected $fillable = [
         'name',
         'img',
-        'email',
         'user_id',
         'kindstartup_id'
+    ];
+
+    protected $map = [
+        'name'          => 'name',
+        'img'           => 'img',
+        'userId'        => 'userid',
+        'kindstartupId' => 'kindstartupid'
     ];
 
 
@@ -69,12 +75,12 @@ class Startup extends Model implements StartupContract
 
     //------------------
 
-    public function avg() {
+   /* public function avg() {
         $result = $this->qualifications()
         ->select(DB::raw('avg(rate) as avg, startup_id'))
         ->groupBy('startup_id');
         return $result;
-     }
+     }*/
 
    
 

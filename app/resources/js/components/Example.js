@@ -5,11 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavBar } from "./ui/navbar";
 
 function Example({ user }) {
+
     return (
-        <div className="container container-fluid">
-            <NavBar user={user} />
-            
-        </div>
+            <div className="container container-fluid">
+                <NavBar user={user} />
+
+            </div>
     );
 }
 

@@ -28,6 +28,8 @@
     "dependencies": {
         "@popperjs/core": "^2.10.1",
         "bootstrap": "5.1.0",
-        "react-router-dom": "^5.3.0"
+        "formik": "^2.2.9",
+        "react-router-dom": "^5.3.0",
+        "yup": "^0.32.11"
     }
 }

@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/startups/{id}','StartupController@GetStartupByUser');
+Route::get('/kindstartups','KindstartupController@index');
+
+Route::post('/startups/store', [App\Http\Controllers\StartupController::class, 'Store']);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

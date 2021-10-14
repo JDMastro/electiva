@@ -135,9 +135,15 @@ return [
     |
     */
 
-    'custom' => [
+    /*'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+        ],
+    ],*/
+
+    'custom' => [
+        'rule-name' => [
+            'attribute-name' => 'custom-message',
         ],
     ],
 

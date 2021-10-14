@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashRouter, Link, Route } from "react-router-dom";
 import { Home } from "../home";
 import { Requests } from "../requests";
@@ -6,14 +6,27 @@ import { Startups } from "../startsup";
 
 
 
+import { StartUpRequest } from "../../services/startupsService";
+import { KindStartupRequest } from "../../services/kindstartupService";
 
 export function NavBar({ user }) {
 
-    
+    const [startups, setstartups] = useState([])
+    const [kind, setkind] = useState([])
+
+
+    useEffect(() => {
+        StartUpRequest.getStartupsByUser(user.id).then(e => { setstartups(e.data.data) })
+        KindStartupRequest.getKindstartup().then(e => { setkind(e) })
+
+
+    }, [])
+
+
 
     return (
         <HashRouter>
-            
+
             <div className="mt-3">
                 <nav className="navbar navbar-expand-md navbar-light bg-white ">
                     <div className="container-fluid">
@@ -65,8 +78,8 @@ export function NavBar({ user }) {
             </div>
 
             <div className="">
-                <Route exact path="/" component={()=> <Home user={user} />} />
-                <Route exact path="/startup" component={Startups} />
+                <Route exact path="/" component={() => <Home startups={startups} />} />
+                <Route exact path="/startup" component={() => <Startups kind={kind} user={user} />} />
                 <Route exact path="/request" component={Requests} />
             </div>
 
